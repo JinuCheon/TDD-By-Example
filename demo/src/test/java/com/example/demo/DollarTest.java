@@ -17,7 +17,9 @@ public class DollarTest {
         public int amout;
 
         public Dollar(final int amount) {
-            throw new UnsupportedOperationException("Unsupported Dollar");
+        }
+
+        public void times(final int multipler) {
         }
     }
 }
