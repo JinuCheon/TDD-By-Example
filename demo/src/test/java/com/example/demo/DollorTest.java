@@ -6,5 +6,8 @@ public class DollorTest {
 
     @Test
     void testMultiplication() {
+        final Dollor five = new Dollor(5);
+        five.times(2);
+        assertEqual(10, five.amout);
     }
 }
