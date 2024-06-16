@@ -1,0 +1,23 @@
+.idea
+demo/.idea
+demo/build
+demo//build/
+demo/!gradle/wrapper/gradle-wrapper.jar
+demo/!**/src/main/**/build/
+demo/!**/src/test/**/build/
+
+### IntelliJ IDEA ###
+demo/.idea/modules.xml
+demo/.idea/jarRepositories.xml
+demo/.idea/compiler.xml
+demo/.idea/libraries/
+demo/*.iws
+demo/*.iml
+demo/*.ipr
+demo/out/
+demo/!**/src/main/**/out/
+demo/!**/src/test/**/out/
+
+### Mac OS ###
+.DS_Store
+demo/.gradle
