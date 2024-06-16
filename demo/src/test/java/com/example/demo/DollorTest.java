@@ -10,4 +10,6 @@ public class DollorTest {
         five.times(2);
         assertEqual(10, five.amout);
     }
+
+    private class Dollor {}
 }
