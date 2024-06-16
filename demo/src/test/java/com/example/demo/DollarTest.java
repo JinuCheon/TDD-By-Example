@@ -11,5 +11,9 @@ public class DollarTest {
         assertEqual(10, five.amout);
     }
 
-    private class Dollar {}
+    private class Dollar {
+        public Dollar(final int amount) {
+            throw new UnsupportedOperationException("Unsupported Dollar");
+        }
+    }
 }
