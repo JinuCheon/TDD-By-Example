@@ -14,7 +14,7 @@ public class DollarTest {
     }
 
     private class Dollar {
-        public int amout;
+        public int amout = 10;
 
         public Dollar(final int amount) {
         }
