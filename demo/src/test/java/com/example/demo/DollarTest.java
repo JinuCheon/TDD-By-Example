@@ -10,17 +10,18 @@ public class DollarTest {
     void testMultiplication() {
         final Dollar five = new Dollar(5);
         five.times(2);
-        assertThat(five.amout).isEqualTo(10);
+        assertThat(five.amount).isEqualTo(10);
     }
 
     private class Dollar {
-        public int amout;
+        public int amount;
 
         public Dollar(final int amount) {
+            this.amount = amount;
         }
 
         public void times(final int multipler) {
-            amout = 5 * 2;
+            amount *= multipler;
         }
     }
 }
