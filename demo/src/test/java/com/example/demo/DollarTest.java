@@ -14,12 +14,13 @@ public class DollarTest {
     }
 
     private class Dollar {
-        public int amout = 10;
+        public int amout;
 
         public Dollar(final int amount) {
         }
 
         public void times(final int multipler) {
+            amout = 5 * 2;
         }
     }
 }
