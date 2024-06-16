@@ -12,6 +12,8 @@ public class DollarTest {
     }
 
     private class Dollar {
+        public int amout;
+
         public Dollar(final int amount) {
             throw new UnsupportedOperationException("Unsupported Dollar");
         }
