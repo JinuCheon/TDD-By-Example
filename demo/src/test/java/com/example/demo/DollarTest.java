@@ -22,8 +22,9 @@ public class DollarTest {
             this.amount = amount;
         }
 
-        public void times(final int multipler) {
+        public Dollar times(final int multipler) {
             amount *= multipler;
+            return null;
         }
     }
 }
