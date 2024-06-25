@@ -23,8 +23,7 @@ public class DollarTest {
         }
 
         public Dollar times(final int multipler) {
-            amount *= multipler;
-            return null;
+            return new Dollar(amount * multipler);
         }
     }
 }
