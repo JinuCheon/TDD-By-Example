@@ -15,6 +15,12 @@ public class DollarTest {
         assertThat(product.amount).isEqualTo(15);
     }
 
+    @Test
+    public void testEquality() {
+        assertThat(new Dollar(5).equals(new Dollar(5))).isTrue();
+        assertThat(new Dollar(5).equals(new Dollar(6))).isFalse();
+    }
+
     private class Dollar {
         public int amount;
 
@@ -24,6 +30,10 @@ public class DollarTest {
 
         public Dollar times(final int multipler) {
             return new Dollar(amount * multipler);
+        }
+
+        public boolean equals(final Dollar dollar) {
+            return dollar.amount == amount;
         }
     }
 }
