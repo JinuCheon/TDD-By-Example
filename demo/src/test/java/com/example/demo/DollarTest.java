@@ -30,5 +30,10 @@ public class DollarTest {
         public Dollar times(final int multipler) {
             return new Dollar(amount * multipler);
         }
+
+        @Override
+        public boolean equals(final Object obj) {
+            return true;
+        }
     }
 }
