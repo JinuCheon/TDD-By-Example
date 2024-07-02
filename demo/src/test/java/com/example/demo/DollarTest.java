@@ -32,9 +32,8 @@ public class DollarTest {
             return new Dollar(amount * multipler);
         }
 
-        @Override
-        public boolean equals(final Object obj) {
-            return
+        public boolean equals(final Dollar dollar) {
+            return dollar.amount == amount;
         }
     }
 }
