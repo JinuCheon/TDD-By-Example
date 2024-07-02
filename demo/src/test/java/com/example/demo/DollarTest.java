@@ -18,6 +18,7 @@ public class DollarTest {
     @Test
     public void testEquality() {
         assertThat(new Dollar(5).equals(new Dollar(5))).isTrue();
+        assertThat(new Dollar(5).equals(new Dollar(6))).isFalse();
     }
 
     private class Dollar {
@@ -33,7 +34,7 @@ public class DollarTest {
 
         @Override
         public boolean equals(final Object obj) {
-            return true;
+            return
         }
     }
 }
