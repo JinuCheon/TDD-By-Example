@@ -28,9 +28,5 @@ public class DollarTest {
         public Dollar times(final int multipler) {
             return new Dollar(amount * multipler);
         }
-
-        public boolean equals(final Dollar dollar) {
-            return dollar.amount == amount;
-        }
     }
 }
