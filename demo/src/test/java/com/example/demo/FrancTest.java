@@ -19,8 +19,7 @@ public class FrancTest {
         assertThat(new Franc(5).equals(new Franc(6))).isFalse();
     }
 
-    private class Franc {
-        private final int amount;
+    private class Franc extends Money {
 
         public Franc(final int amount) {
             this.amount = amount;
