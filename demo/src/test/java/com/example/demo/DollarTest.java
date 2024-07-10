@@ -9,8 +9,8 @@ public class DollarTest {
     @Test
     void testMultiplication() {
         final Money fiveDollar = Money.dollar(5);
-        assertThat(fiveDollar.times(2)).isEqualTo(new Dollar(10));
-        assertThat(fiveDollar.times(2)).isEqualTo(new Dollar(10));
+        assertThat(fiveDollar.times(2)).isEqualTo(Money.dollar(10));
+        assertThat(fiveDollar.times(2)).isEqualTo(Money.dollar(10));
 
         final Franc fiveFranc = new Franc(5);
         assertThat(fiveFranc.times(2)).isEqualTo(new Franc(10));
@@ -19,11 +19,11 @@ public class DollarTest {
 
     @Test
     void testEquality() {
-        assertThat(new Dollar(5).equals(new Dollar(5))).isTrue();
-        assertThat(new Dollar(5).equals(new Dollar(6))).isFalse();
+        assertThat(Money.dollar(5).equals(Money.dollar(5))).isTrue();
+        assertThat(Money.dollar(5).equals(Money.dollar(6))).isFalse();
         assertThat(new Franc(5).equals(new Franc(5))).isTrue();
         assertThat(new Franc(5).equals(new Franc(6))).isFalse();
-        assertThat(new Franc(5).equals(new Dollar(5))).isFalse();
+        assertThat(new Franc(5).equals(Money.dollar(5))).isFalse();
     }
 
     private static class Dollar extends Money {
