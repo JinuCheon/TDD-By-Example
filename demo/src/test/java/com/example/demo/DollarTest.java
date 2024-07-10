@@ -23,6 +23,7 @@ public class DollarTest {
         assertThat(new Dollar(5).equals(new Dollar(6))).isFalse();
         assertThat(new Franc(5).equals(new Franc(5))).isTrue();
         assertThat(new Franc(5).equals(new Franc(6))).isFalse();
+        assertThat(new Franc(5).equals(new Dollar(5))).isFalse();
     }
 
     private class Dollar extends Money {
