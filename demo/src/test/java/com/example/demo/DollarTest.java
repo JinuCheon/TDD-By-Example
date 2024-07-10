@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DollarTest {
+class DollarTest {
 
     @Test
     void testMultiplication() {
@@ -26,26 +26,26 @@ public class DollarTest {
         assertThat(new Franc(5).equals(Money.dollar(5))).isFalse();
     }
 
-    private static class Dollar extends Money {
+    private static final class Dollar extends Money {
 
-        public Dollar(final int amount) {
+        private Dollar(final int amount) {
             this.amount = amount;
         }
 
-        public Money times(final int multipler) {
-            return new Dollar(amount * multipler);
+        public Money times(final int multiplier) {
+            return new Dollar(amount * multiplier);
         }
     }
 
     private abstract static class Money {
-        protected int amount;
+        int amount;
 
-        public static Money dollar(final int amount) {
+        static Money dollar(final int amount) {
             return new Dollar(amount);
         }
 
-        public boolean equals(final Object object) {
-            final Money dollar = (Money) object;
+        public boolean equals(final Object obj) {
+            final Money dollar = (Money) obj;
             return amount == dollar.amount
                     && getClass().equals(dollar.getClass());
         }
@@ -53,17 +53,17 @@ public class DollarTest {
         public abstract Money times(final int multiplier);
     }
 
-    private class Franc extends Money {
+    private static final class Franc extends Money {
 
-        public Franc(final int amount) {
+        private Franc(final int amount) {
             this.amount = amount;
         }
 
-        public Money times(final int multipler) {
-            return new Franc(amount * multipler);
+        public Money times(final int multiplier) {
+            return new Franc(amount * multiplier);
         }
 
-        public boolean equals(final Franc dollar) {
+        boolean equals(final Franc dollar) {
             return dollar.amount == amount;
         }
     }
