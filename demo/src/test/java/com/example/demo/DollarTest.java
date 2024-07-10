@@ -13,17 +13,17 @@ class DollarTest {
         assertThat(fiveDollar.times(2)).isEqualTo(Money.dollar(10));
 
         final Franc fiveFranc = new Franc(5);
-        assertThat(fiveFranc.times(2)).isEqualTo(new Franc(10));
-        assertThat(fiveFranc.times(2)).isEqualTo(new Franc(10));
+        assertThat(fiveFranc.times(2)).isEqualTo(Money.franc(10));
+        assertThat(fiveFranc.times(2)).isEqualTo(Money.franc(10));
     }
 
     @Test
     void testEquality() {
         assertThat(Money.dollar(5).equals(Money.dollar(5))).isTrue();
         assertThat(Money.dollar(5).equals(Money.dollar(6))).isFalse();
-        assertThat(new Franc(5).equals(new Franc(5))).isTrue();
-        assertThat(new Franc(5).equals(new Franc(6))).isFalse();
-        assertThat(new Franc(5).equals(Money.dollar(5))).isFalse();
+        assertThat(Money.franc(5).equals(Money.franc(5))).isTrue();
+        assertThat(Money.franc(5).equals(Money.franc(6))).isFalse();
+        assertThat(Money.franc(5).equals(Money.dollar(5))).isFalse();
     }
 
     private static final class Dollar extends Money {
@@ -42,6 +42,10 @@ class DollarTest {
 
         static Money dollar(final int amount) {
             return new Dollar(amount);
+        }
+
+        static Money franc(final int amount) {
+            return new Franc(amount);
         }
 
         public boolean equals(final Object obj) {
