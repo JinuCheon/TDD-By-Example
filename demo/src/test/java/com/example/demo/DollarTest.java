@@ -8,7 +8,7 @@ public class DollarTest {
 
     @Test
     void testMultiplication() {
-        final Dollar fiveDollar = new Dollar(5);
+        final Money fiveDollar = Money.dollar(5);
         assertThat(fiveDollar.times(2)).isEqualTo(new Dollar(10));
         assertThat(fiveDollar.times(2)).isEqualTo(new Dollar(10));
 
@@ -26,14 +26,28 @@ public class DollarTest {
         assertThat(new Franc(5).equals(new Dollar(5))).isFalse();
     }
 
-    private class Dollar extends Money {
+    private static class Dollar extends Money {
 
         public Dollar(final int amount) {
             this.amount = amount;
         }
 
-        public Dollar times(final int multipler) {
+        public Money times(final int multipler) {
             return new Dollar(amount * multipler);
+        }
+    }
+
+    private static class Money {
+        protected int amount;
+
+        public static Money dollar(final int amount) {
+            return new Dollar(amount);
+        }
+
+        public boolean equals(final Object object) {
+            final Money dollar = (Money) object;
+            return amount == dollar.amount
+                    && getClass().equals(dollar.getClass());
         }
     }
 
@@ -43,22 +57,12 @@ public class DollarTest {
             this.amount = amount;
         }
 
-        public Franc times(final int multipler) {
+        public Money times(final int multipler) {
             return new Franc(amount * multipler);
         }
 
         public boolean equals(final Franc dollar) {
             return dollar.amount == amount;
-        }
-    }
-
-    private class Money {
-        protected int amount;
-
-        public boolean equals(final Object object) {
-            final Money dollar = (Money) object;
-            return amount == dollar.amount
-                    && getClass().equals(dollar.getClass());
         }
     }
 
