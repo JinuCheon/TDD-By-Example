@@ -26,20 +26,9 @@ class DollarTest {
         assertThat(Money.franc(5).equals(Money.dollar(5))).isFalse();
     }
 
-    private static final class Dollar extends Money {
-
-        private Dollar(final int amount) {
-            this.amount = amount;
-        }
-
-        public Money times(final int multiplier) {
-            return new Dollar(amount * multiplier);
-        }
-    }
-
     private abstract static class Money {
-        int amount;
 
+        int amount;
         static Money dollar(final int amount) {
             return new Dollar(amount);
         }
@@ -55,9 +44,22 @@ class DollarTest {
         }
 
         public abstract Money times(final int multiplier);
+
+    }
+
+    private static final class Dollar extends Money {
+
+        private Dollar(final int amount) {
+            this.amount = amount;
+        }
+
+        public Money times(final int multiplier) {
+            return new Dollar(amount * multiplier);
+        }
     }
 
     private static final class Franc extends Money {
+
 
         private Franc(final int amount) {
             this.amount = amount;
