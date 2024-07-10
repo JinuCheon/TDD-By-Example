@@ -57,7 +57,8 @@ public class DollarTest {
 
         public boolean equals(final Object object) {
             final Money dollar = (Money) object;
-            return amount == dollar.amount;
+            return amount == dollar.amount
+                    && getClass().equals(dollar.getClass());
         }
     }
 
