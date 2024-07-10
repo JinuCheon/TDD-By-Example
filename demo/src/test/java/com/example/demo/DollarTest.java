@@ -37,7 +37,7 @@ public class DollarTest {
         }
     }
 
-    private static class Money {
+    private abstract static class Money {
         protected int amount;
 
         public static Money dollar(final int amount) {
@@ -49,6 +49,8 @@ public class DollarTest {
             return amount == dollar.amount
                     && getClass().equals(dollar.getClass());
         }
+
+        public abstract Money times(final int multiplier);
     }
 
     private class Franc extends Money {
