@@ -56,8 +56,11 @@ class DollarTest {
 
     private static final class Dollar extends Money {
 
+        private final String currency;
+
         private Dollar(final int amount) {
             this.amount = amount;
+            currency = "USD";
         }
 
         public Money times(final int multiplier) {
@@ -65,15 +68,17 @@ class DollarTest {
         }
 
         public String currency() {
-            return "USD";
+            return currency;
         }
     }
 
     private static final class Franc extends Money {
 
+        private final String currency;
 
         private Franc(final int amount) {
             this.amount = amount;
+            currency = "CHF";
         }
 
         public Money times(final int multiplier) {
@@ -85,7 +90,7 @@ class DollarTest {
         }
 
         public String currency() {
-            return "CHF";
+            return currency;
         }
     }
 
