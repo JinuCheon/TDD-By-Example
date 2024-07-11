@@ -12,7 +12,7 @@ class DollarTest {
         assertThat(fiveDollar.times(2)).isEqualTo(Money.dollar(10));
         assertThat(fiveDollar.times(2)).isEqualTo(Money.dollar(10));
 
-        final Franc fiveFranc = new Franc(5);
+        final Franc fiveFranc = new Franc(5, "CHF");
         assertThat(fiveFranc.times(2)).isEqualTo(Money.franc(10));
         assertThat(fiveFranc.times(2)).isEqualTo(Money.franc(10));
     }
@@ -26,15 +26,28 @@ class DollarTest {
         assertThat(Money.franc(5).equals(Money.dollar(5))).isFalse();
     }
 
+    @Test
+    void testCurrency() {
+        assertThat("USD").isEqualTo(Money.dollar(1).currency());
+        assertThat("CHF").isEqualTo(Money.franc(1).currency());
+    }
+
     private abstract static class Money {
 
-        int amount;
+        final String currency;
+        final int amount;
+
+        private Money(final int amount, final String currency) {
+            this.amount = amount;
+            this.currency = currency;
+        }
+
         static Money dollar(final int amount) {
-            return new Dollar(amount);
+            return new Dollar(amount, "USD");
         }
 
         static Money franc(final int amount) {
-            return new Franc(amount);
+            return new Franc(amount, "CHF");
         }
 
         public boolean equals(final Object obj) {
@@ -45,32 +58,40 @@ class DollarTest {
 
         public abstract Money times(final int multiplier);
 
+        public abstract String currency();
     }
 
     private static final class Dollar extends Money {
 
-        private Dollar(final int amount) {
-            this.amount = amount;
+        private Dollar(final int amount, final String currency) {
+            super(amount, currency);
         }
 
         public Money times(final int multiplier) {
-            return new Dollar(amount * multiplier);
+            return new Dollar(amount * multiplier, "USD");
+        }
+
+        public String currency() {
+            return currency;
         }
     }
 
     private static final class Franc extends Money {
 
-
-        private Franc(final int amount) {
-            this.amount = amount;
+        private Franc(final int amount, final String currency) {
+            super(amount, currency);
         }
 
         public Money times(final int multiplier) {
-            return new Franc(amount * multiplier);
+            return Money.franc(amount * multiplier);
         }
 
         boolean equals(final Franc dollar) {
             return dollar.amount == amount;
+        }
+
+        public String currency() {
+            return currency;
         }
     }
 
