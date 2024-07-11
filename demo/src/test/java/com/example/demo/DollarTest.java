@@ -82,7 +82,7 @@ class DollarTest {
         }
 
         public Money times(final int multiplier) {
-            return new Franc(amount * multiplier);
+            return Money.franc(amount * multiplier);
         }
 
         boolean equals(final Franc dollar) {
