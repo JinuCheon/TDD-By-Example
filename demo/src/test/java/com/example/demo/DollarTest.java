@@ -51,6 +51,7 @@ class DollarTest {
 
         public abstract Money times(final int multiplier);
 
+        public abstract String currency();
     }
 
     private static final class Dollar extends Money {
@@ -61,6 +62,10 @@ class DollarTest {
 
         public Money times(final int multiplier) {
             return new Dollar(amount * multiplier);
+        }
+
+        public String currency() {
+            return "USD";
         }
     }
 
@@ -77,6 +82,10 @@ class DollarTest {
 
         boolean equals(final Franc dollar) {
             return dollar.amount == amount;
+        }
+
+        public String currency() {
+            return "CHF";
         }
     }
 
