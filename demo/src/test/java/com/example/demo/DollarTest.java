@@ -34,7 +34,14 @@ class DollarTest {
 
     private abstract static class Money {
 
-        int amount;
+        final String currency;
+        final int amount;
+
+        private Money(final int amount, final String currency) {
+            this.amount = amount;
+            this.currency = currency;
+        }
+
         static Money dollar(final int amount) {
             return new Dollar(amount, "USD");
         }
@@ -56,11 +63,8 @@ class DollarTest {
 
     private static final class Dollar extends Money {
 
-        private final String currency;
-
         private Dollar(final int amount, final String currency) {
-            this.amount = amount;
-            this.currency = currency;
+            super(amount, currency);
         }
 
         public Money times(final int multiplier) {
@@ -74,11 +78,8 @@ class DollarTest {
 
     private static final class Franc extends Money {
 
-        private final String currency;
-
         private Franc(final int amount, final String currency) {
-            this.amount = amount;
-            this.currency = currency;
+            super(amount, currency);
         }
 
         public Money times(final int multiplier) {
