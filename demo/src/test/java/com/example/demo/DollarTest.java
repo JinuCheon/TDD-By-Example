@@ -67,6 +67,10 @@ class DollarTest {
         public String currency() {
             return currency;
         }
+
+        public Money plus(final Money addend) {
+            return new Money(amount + addend.amount, currency);
+        }
     }
 
 }
