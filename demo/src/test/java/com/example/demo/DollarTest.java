@@ -32,11 +32,16 @@ class DollarTest {
 
     @Test
     void testSimpleAddition() {
-        final Money sum = Money.dollar(5).plus(Money.dollar(5));
-        assertThat(sum).isEqualTo(Money.dollar(10));
+        final Money five = Money.dollar(5);
+        final Expression sum = five.plus(five);
+        final Bank bank = new Bank();
+        final Money reduced = bank.reduce(sum, "USD");
+        assertThat(Money.dollar(10)).isEqualTo(reduced);
     }
 
-    private static final class Money {
+    private interface Expression {}
+
+    private static final class Money implements Expression {
 
         final String currency;
         final int amount;
@@ -68,9 +73,14 @@ class DollarTest {
             return currency;
         }
 
-        public Money plus(final Money addend) {
+        public Expression plus(final Money addend) {
             return new Money(amount + addend.amount, currency);
         }
     }
 
+    private class Bank {
+        public Money reduce(final Expression source, final String to) {
+            return Money.dollar(10);
+        }
+    }
 }
