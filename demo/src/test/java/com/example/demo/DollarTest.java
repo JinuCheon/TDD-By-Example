@@ -48,11 +48,11 @@ class DollarTest {
         }
 
         static Money dollar(final int amount) {
-            return new Dollar(amount, "USD");
+            return new Money(amount, "USD");
         }
 
         static Money franc(final int amount) {
-            return new Franc(amount, "CHF");
+            return new Money(amount, "CHF");
         }
 
         public boolean equals(final Object obj) {
