@@ -12,7 +12,7 @@ class DollarTest {
         assertThat(fiveDollar.times(2)).isEqualTo(Money.dollar(10));
         assertThat(fiveDollar.times(2)).isEqualTo(Money.dollar(10));
 
-        final Franc fiveFranc = new Franc(5, "CHF");
+        final Money fiveFranc = Money.franc(5);
         assertThat(fiveFranc.times(2)).isEqualTo(Money.franc(10));
         assertThat(fiveFranc.times(2)).isEqualTo(Money.franc(10));
     }
@@ -30,7 +30,7 @@ class DollarTest {
         assertThat("CHF").isEqualTo(Money.franc(1).currency());
     }
 
-    private static class Money {
+    private static final class Money {
 
         final String currency;
         final int amount;
@@ -60,20 +60,6 @@ class DollarTest {
 
         public String currency() {
             return currency;
-        }
-    }
-
-    private static final class Dollar extends Money {
-
-        private Dollar(final int amount, final String currency) {
-            super(amount, currency);
-        }
-    }
-
-    private static final class Franc extends Money {
-
-        private Franc(final int amount, final String currency) {
-            super(amount, currency);
         }
     }
 
