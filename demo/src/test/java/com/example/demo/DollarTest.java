@@ -30,6 +30,12 @@ class DollarTest {
         assertThat("CHF").isEqualTo(Money.franc(1).currency());
     }
 
+    @Test
+    void testSimpleAddition() {
+        final Money sum = Money.dollar(5).plus(Money.dollar(5));
+        assertThat(sum).isEqualTo(Money.dollar(10));
+    }
+
     private static final class Money {
 
         final String currency;
