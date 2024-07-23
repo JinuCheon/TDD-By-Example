@@ -75,24 +75,12 @@ class DollarTest {
         private Dollar(final int amount, final String currency) {
             super(amount, currency);
         }
-
-        public String currency() {
-            return currency;
-        }
     }
 
     private static final class Franc extends Money {
 
         private Franc(final int amount, final String currency) {
             super(amount, currency);
-        }
-
-        boolean equals(final Franc dollar) {
-            return dollar.amount == amount;
-        }
-
-        public String currency() {
-            return currency;
         }
     }
 
