@@ -62,7 +62,7 @@ class DollarTest {
         }
 
         public Money times(final int multiplier) {
-            return null;
+            return new Money(amount * multiplier, currency());
         }
 
         public String currency() {
@@ -76,10 +76,6 @@ class DollarTest {
             super(amount, currency);
         }
 
-        public Money times(final int multiplier) {
-            return new Dollar(amount * multiplier, currency);
-        }
-
         public String currency() {
             return currency;
         }
@@ -89,10 +85,6 @@ class DollarTest {
 
         private Franc(final int amount, final String currency) {
             super(amount, currency);
-        }
-
-        public Money times(final int multiplier) {
-            return new Money(amount * multiplier, currency);
         }
 
         boolean equals(final Franc dollar) {
