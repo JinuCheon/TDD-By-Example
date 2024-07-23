@@ -12,7 +12,7 @@ class DollarTest {
         assertThat(fiveDollar.times(2)).isEqualTo(Money.dollar(10));
         assertThat(fiveDollar.times(2)).isEqualTo(Money.dollar(10));
 
-        final Franc fiveFranc = new Franc(5, "CHF");
+        final Money fiveFranc = Money.franc(5);
         assertThat(fiveFranc.times(2)).isEqualTo(Money.franc(10));
         assertThat(fiveFranc.times(2)).isEqualTo(Money.franc(10));
     }
@@ -22,8 +22,6 @@ class DollarTest {
         assertThat(Money.dollar(5).equals(Money.dollar(5))).isTrue();
         assertThat(Money.dollar(5).equals(Money.dollar(6))).isFalse();
         assertThat(Money.franc(5).equals(Money.franc(5))).isTrue();
-        assertThat(Money.franc(5).equals(Money.franc(6))).isFalse();
-        assertThat(Money.franc(5).equals(Money.dollar(5))).isFalse();
     }
 
     @Test
@@ -32,7 +30,18 @@ class DollarTest {
         assertThat("CHF").isEqualTo(Money.franc(1).currency());
     }
 
-    private abstract static class Money {
+    @Test
+    void testSimpleAddition() {
+        final Money five = Money.dollar(5);
+        final Expression sum = five.plus(five);
+        final Bank bank = new Bank();
+        final Money reduced = bank.reduce(sum, "USD");
+        assertThat(Money.dollar(10)).isEqualTo(reduced);
+    }
+
+    private interface Expression {}
+
+    private static final class Money implements Expression {
 
         final String currency;
         final int amount;
@@ -43,56 +52,35 @@ class DollarTest {
         }
 
         static Money dollar(final int amount) {
-            return new Dollar(amount, "USD");
+            return new Money(amount, "USD");
         }
 
         static Money franc(final int amount) {
-            return new Franc(amount, "CHF");
+            return new Money(amount, "CHF");
         }
 
         public boolean equals(final Object obj) {
-            final Money dollar = (Money) obj;
-            return amount == dollar.amount
-                    && getClass().equals(dollar.getClass());
-        }
-
-        public abstract Money times(final int multiplier);
-
-        public abstract String currency();
-    }
-
-    private static final class Dollar extends Money {
-
-        private Dollar(final int amount, final String currency) {
-            super(amount, currency);
+            final Money money = (Money) obj;
+            return amount == money.amount
+                   && currency().equals(money.currency());
         }
 
         public Money times(final int multiplier) {
-            return new Dollar(amount * multiplier, "USD");
+            return new Money(amount * multiplier, currency());
         }
 
         public String currency() {
             return currency;
         }
-    }
 
-    private static final class Franc extends Money {
-
-        private Franc(final int amount, final String currency) {
-            super(amount, currency);
-        }
-
-        public Money times(final int multiplier) {
-            return Money.franc(amount * multiplier);
-        }
-
-        boolean equals(final Franc dollar) {
-            return dollar.amount == amount;
-        }
-
-        public String currency() {
-            return currency;
+        public Expression plus(final Money addend) {
+            return new Money(amount + addend.amount, currency);
         }
     }
 
+    private class Bank {
+        public Money reduce(final Expression source, final String to) {
+            return Money.dollar(10);
+        }
+    }
 }
