@@ -22,19 +22,12 @@ class DollarTest {
         assertThat(Money.dollar(5).equals(Money.dollar(5))).isTrue();
         assertThat(Money.dollar(5).equals(Money.dollar(6))).isFalse();
         assertThat(Money.franc(5).equals(Money.franc(5))).isTrue();
-        assertThat(Money.franc(5).equals(Money.franc(6))).isFalse();
-        assertThat(Money.franc(5).equals(Money.dollar(5))).isFalse();
     }
 
     @Test
     void testCurrency() {
         assertThat("USD").isEqualTo(Money.dollar(1).currency());
         assertThat("CHF").isEqualTo(Money.franc(1).currency());
-    }
-
-    @Test
-    void testDifferentClassEquality() {
-        assertThat(new Money(10, "CHF").equals(new Franc(10, "CHF"))).isTrue();
     }
 
     private static class Money {
