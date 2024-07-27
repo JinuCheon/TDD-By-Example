@@ -84,7 +84,19 @@ class DollarTest {
         assertThat(new Bank().rate("USD", "USD")).isEqualTo(1);
     }
 
+    @Test
+    void testMixedAddition() {
+        final Expression fiveBucks = Money.dollar(5);
+        final Expression tenFrancs = Money.franc(10);
+        final Bank bank = new Bank();
+        bank.addRate("CHF", "USD", 2);
+        final Money result = bank.reduce(fiveBucks.plus(tenFrancs), "USD");
+        assertThat(Money.dollar(10)).isEqualTo(result);
+    }
+
     private interface Expression {
+        Expression plus(Expression addend);
+
         Money reduce(final Bank bank, String to);
     }
 
@@ -112,7 +124,7 @@ class DollarTest {
                    && currency().equals(money.currency());
         }
 
-        public Money times(final int multiplier) {
+        public Expression times(final int multiplier) {
             return new Money(amount * multiplier, currency());
         }
 
@@ -120,7 +132,8 @@ class DollarTest {
             return currency;
         }
 
-        public Expression plus(final Money addend) {
+        @Override
+        public Expression plus(final Expression addend) {
             return new Sum(this, addend);
         }
 
@@ -132,16 +145,21 @@ class DollarTest {
     }
 
     private static class Sum implements Expression {
-        final Money augend;
-        final Money addend;
+        final Expression augend;
+        final Expression addend;
 
-        private Sum(final Money money, final Money addend) {
+        private Sum(final Expression money, final Expression addend) {
             augend = money;
             this.addend = addend;
         }
 
+        @Override
+        public Expression plus(final Expression addend) {
+            return null;
+        }
+
         public Money reduce(final Bank bank, final String to) {
-            final int amount = augend.amount + addend.amount;
+            final int amount = augend.reduce(bank, to).amount + addend.reduce(bank, to).amount;
             return new Money(amount, to);
         }
     }
