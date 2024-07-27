@@ -94,10 +94,34 @@ class DollarTest {
         assertThat(Money.dollar(10)).isEqualTo(result);
     }
 
+    @Test
+    void testSumPlusMoney() {
+        final Expression fiveBucks = Money.dollar(5);
+        final Expression tenFrancs = Money.franc(10);
+        final Bank bank = new Bank();
+        bank.addRate("CHF", "USD", 2);
+        final Expression sum = new Sum(fiveBucks, tenFrancs).plus(fiveBucks);
+        final Money result = bank.reduce(sum, "USD");
+        assertThat(Money.dollar(15)).isEqualTo(result);
+    }
+
+    @Test
+    void testSumTimes() {
+        final Expression fiveBucks = Money.dollar(5);
+        final Expression tenFrancs = Money.franc(10);
+        final Bank bank = new Bank();
+        bank.addRate("CHF", "USD", 2);
+        final Expression sum = new Sum(fiveBucks, tenFrancs).times(2);
+        final Money result = bank.reduce(sum, "USD");
+        assertThat(Money.dollar(20)).isEqualTo(result);
+    }
+
     private interface Expression {
         Expression plus(Expression addend);
 
         Money reduce(final Bank bank, String to);
+
+        Expression times(int multiplier);
     }
 
     private static final class Money implements Expression {
@@ -124,8 +148,9 @@ class DollarTest {
                    && currency().equals(money.currency());
         }
 
+        @Override
         public Expression times(final int multiplier) {
-            return new Money(amount * multiplier, currency());
+            return new Money(amount * multiplier, currency);
         }
 
         public String currency() {
@@ -155,12 +180,18 @@ class DollarTest {
 
         @Override
         public Expression plus(final Expression addend) {
-            return null;
+            return new Sum(this, addend);
         }
 
+        @Override
         public Money reduce(final Bank bank, final String to) {
             final int amount = augend.reduce(bank, to).amount + addend.reduce(bank, to).amount;
             return new Money(amount, to);
+        }
+
+        @Override
+        public Expression times(final int multiplier) {
+            return new Sum(augend.times(multiplier), addend.times(multiplier));
         }
     }
 
