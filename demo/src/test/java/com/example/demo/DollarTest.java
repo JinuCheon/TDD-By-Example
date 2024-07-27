@@ -39,7 +39,33 @@ class DollarTest {
         assertThat(Money.dollar(10)).isEqualTo(reduced);
     }
 
-    private interface Expression {}
+    @Test
+    void testPlusReturnsSum() {
+        final Money five = Money.dollar(5);
+        final Expression result = five.plus(five);
+        final Sum sum = (Sum) result;
+        assertThat(five).isEqualTo(sum.augend);
+        assertThat(five).isEqualTo(sum.addend);
+    }
+
+    @Test
+    public void testReduceSum() {
+        final Expression sum = new Sum(Money.dollar(3), Money.dollar(4));
+        final Bank bank = new Bank();
+        final Money result = bank.reduce(sum, "USD");
+        assertThat(Money.dollar(7)).isEqualTo(result);
+    }
+
+    @Test
+    void testReduceMoney() {
+        final Bank bank = new Bank();
+        final Money result = bank.reduce(Money.dollar(1), "USD");
+        assertThat(Money.dollar(1)).isEqualTo(result);
+    }
+
+    private interface Expression {
+        Money reduce(String to);
+    }
 
     private static final class Money implements Expression {
 
@@ -74,13 +100,33 @@ class DollarTest {
         }
 
         public Expression plus(final Money addend) {
-            return new Money(amount + addend.amount, currency);
+            return new Sum(this, addend);
+        }
+
+        @Override
+        public Money reduce(final String to) {
+            return this;
+        }
+    }
+
+    private static class Sum implements Expression {
+        final Money augend;
+        final Money addend;
+
+        private Sum(final Money money, final Money addend) {
+            augend = money;
+            this.addend = addend;
+        }
+
+        public Money reduce(final String to) {
+            final int amount = augend.amount + addend.amount;
+            return new Money(amount, to);
         }
     }
 
     private class Bank {
         public Money reduce(final Expression source, final String to) {
-            return Money.dollar(10);
+            return source.reduce(to);
         }
     }
 }
