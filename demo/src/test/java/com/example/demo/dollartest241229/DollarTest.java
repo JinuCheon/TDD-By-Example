@@ -16,9 +16,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 class DollarTest {
 
     @Test
-    public void testMultiplication() {
+    void testMultiplication() {
         final Dollar five = new Dollar(5);
         five.times(2);
         assertThat(five.amount).isEqualTo(10);
+        five.times(3);
+        assertThat(five.amount).isEqualTo(15);
     }
 }
