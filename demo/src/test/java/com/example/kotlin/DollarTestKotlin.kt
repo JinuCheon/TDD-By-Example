@@ -1,4 +1,4 @@
-package com.example.demo
+package com.example.kotlin
 
 import org.junit.jupiter.api.Test
 
