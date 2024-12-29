@@ -1,5 +1,9 @@
 package com.example.demo.dollartest241229;
 
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
 /**
  * 할 일 목록
  *
@@ -11,6 +15,7 @@ package com.example.demo.dollartest241229;
  */
 class DollarTest {
 
+    @Test
     public void testMultiplication() {
         final Dollar five = new Dollar(5);
         five.times(2);
