@@ -12,6 +12,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * - [ ] amount를 private으로 만들기
  * - [v] Dollar 부작용(side effect)?
  * - [ ] Money 반올림?
+ * - [ ] equals()
+ * - [ ] hashCode()
  */
 class DollarTest {
 
