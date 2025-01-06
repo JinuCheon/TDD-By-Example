@@ -26,7 +26,7 @@ class DollarTest {
 
     @Test
     void testMultiplication() {
-        final Dollar five = new Dollar(5);
+        final Money five = Dollar.dollar(5);
         assertThat(new Dollar(10).equals(five.times(2))).isTrue();
         assertThat(new Dollar(15).equals(five.times(3))).isTrue();
     }
