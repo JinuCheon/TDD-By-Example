@@ -6,6 +6,7 @@ class Money {
     @Override
     public boolean equals(final Object obj) {
         final Money dollar = (Money) obj;
-        return amount == dollar.amount;
+        return amount == dollar.amount
+               && getClass().equals(dollar.getClass());
     }
 }
