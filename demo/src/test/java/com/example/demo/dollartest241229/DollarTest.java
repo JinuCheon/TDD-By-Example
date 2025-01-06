@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * - [ ] Equals object
  * - [v] 5CHF × 2=10CHF
  * - [ ] Dollar/Franc 중복
- * - [ ] 공용 equals
+ * - [v] 공용 equals
  * - [ ] 공용 times
  */
 class DollarTest {
