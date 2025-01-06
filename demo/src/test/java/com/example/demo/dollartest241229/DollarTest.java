@@ -25,6 +25,13 @@ class DollarTest {
     }
 
     @Test
+    void testFrancMultiplication() {
+        final Franc five = new Franc(5);
+        assertThat(new Franc(10).equals(five.times(2))).isTrue();
+        assertThat(new Franc(15).equals(five.times(3))).isTrue();
+    }
+
+    @Test
     void testEquality() {
         assertThat(new Dollar(5).equals(new Dollar(5))).isTrue();
         assertThat(new Dollar(5).equals(new Dollar(6))).isFalse();
