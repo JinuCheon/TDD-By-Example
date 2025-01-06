@@ -1,7 +1,9 @@
 package com.example.demo.dollartest241229;
 
-class Money {
+abstract class Money {
     protected int amount;
+
+    abstract Money times(int multiplier);
 
     @Override
     public boolean equals(final Object obj) {
