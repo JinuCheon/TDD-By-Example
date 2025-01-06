@@ -1,8 +1,6 @@
 package com.example.demo.dollartest241229;
 
-public class Dollar {
-    public int amount;
-
+public class Dollar extends Money {
     Dollar(final int amount) {
         this.amount = amount;
     }
