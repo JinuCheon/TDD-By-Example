@@ -20,10 +20,8 @@ class DollarTest {
     @Test
     void testMultiplication() {
         final Dollar five = new Dollar(5);
-        Dollar product = five.times(2);
-        assertThat(product.amount).isEqualTo(10);
-        product = five.times(3);
-        assertThat(product.amount).isEqualTo(15);
+        assertThat(new Dollar(10).equals(five.times(2))).isTrue();
+        assertThat(new Dollar(15).equals(five.times(3))).isTrue();
     }
 
     @Test
