@@ -5,6 +5,10 @@ abstract class Money {
 
     abstract Money times(int multiplier);
 
+    static Dollar dollar(final int amount) {
+        return new Dollar(amount);
+    }
+
     @Override
     public boolean equals(final Object obj) {
         final Money dollar = (Money) obj;

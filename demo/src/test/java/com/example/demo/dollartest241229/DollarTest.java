@@ -26,9 +26,9 @@ class DollarTest {
 
     @Test
     void testMultiplication() {
-        final Money five = Dollar.dollar(5);
-        assertThat(new Dollar(10).equals(five.times(2))).isTrue();
-        assertThat(new Dollar(15).equals(five.times(3))).isTrue();
+        final Money five = Money.dollar(5);
+        assertThat(Money.dollar(10).equals(five.times(2))).isTrue();
+        assertThat(Money.dollar(15).equals(five.times(3))).isTrue();
     }
 
     @Test
@@ -40,10 +40,10 @@ class DollarTest {
 
     @Test
     void testEquality() {
-        assertThat(new Dollar(5).equals(new Dollar(5))).isTrue();
-        assertThat(new Dollar(5).equals(new Dollar(6))).isFalse();
+        assertThat(Money.dollar(5).equals(Money.dollar(5))).isTrue();
+        assertThat(Money.dollar(5).equals(Money.dollar(6))).isFalse();
         assertThat(new Franc(5).equals(new Franc(5))).isTrue();
         assertThat(new Franc(5).equals(new Franc(6))).isFalse();
-        assertThat(new Franc(5).equals(new Dollar(5))).isFalse();
+        assertThat(new Franc(5).equals(Money.dollar(5))).isFalse();
     }
 }
