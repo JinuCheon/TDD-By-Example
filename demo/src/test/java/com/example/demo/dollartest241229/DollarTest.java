@@ -34,16 +34,16 @@ class DollarTest {
     @Test
     void testFrancMultiplication() {
         final Franc five = new Franc(5);
-        assertThat(new Franc(10).equals(five.times(2))).isTrue();
-        assertThat(new Franc(15).equals(five.times(3))).isTrue();
+        assertThat(Money.franc(10).equals(five.times(2))).isTrue();
+        assertThat(Money.franc(15).equals(five.times(3))).isTrue();
     }
 
     @Test
     void testEquality() {
         assertThat(Money.dollar(5).equals(Money.dollar(5))).isTrue();
         assertThat(Money.dollar(5).equals(Money.dollar(6))).isFalse();
-        assertThat(new Franc(5).equals(new Franc(5))).isTrue();
-        assertThat(new Franc(5).equals(new Franc(6))).isFalse();
-        assertThat(new Franc(5).equals(Money.dollar(5))).isFalse();
+        assertThat(Money.franc(5).equals(Money.franc(5))).isTrue();
+        assertThat(Money.franc(5).equals(Money.franc(6))).isFalse();
+        assertThat(Money.franc(5).equals(Money.dollar(5))).isFalse();
     }
 }

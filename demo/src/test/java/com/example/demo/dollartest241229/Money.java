@@ -3,6 +3,10 @@ package com.example.demo.dollartest241229;
 abstract class Money {
     protected int amount;
 
+    static Object franc(final int amount) {
+        return new Franc(amount);
+    }
+
     abstract Money times(int multiplier);
 
     static Dollar dollar(final int amount) {
